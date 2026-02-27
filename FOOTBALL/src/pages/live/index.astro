@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const liveMatches = [
+  { id: 1, league: "Premier League", home: "Manchester City", away: "Liverpool", homeScore: 2, awayScore: 1, minute: "78'", homeLogo: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", awayLogo: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", status: "LIVE" },
+  { id: 2, league: "La Liga", home: "Real Madrid", away: "Barcelona", homeScore: 1, awayScore: 1, minute: "65'", homeLogo: "🇪🇸", awayLogo: "🇪🇸", status: "LIVE" },
+  { id: 3, league: "Serie A", home: "Juventus", away: "AC Milan", homeScore: 0, awayScore: 2, minute: "82'", homeLogo: "🇮🇹", awayLogo: "🇮🇹", status: "LIVE" },
+  { id: 4, league: "Champions League", home: "Bayern Munich", away: "Paris SG", homeScore: 3, awayScore: 2, minute: "ET 105'", homeLogo: "🇩🇪", awayLogo: "🇫🇷", status: "LIVE" },
+  { id: 5, league: "Bundesliga", home: "Dortmund", away: "Werder Bremen", homeScore: 4, awayScore: 0, minute: "90+3'", homeLogo: "🇩🇪", awayLogo: "🇩🇪", status: "LIVE" },
+  { id: 6, league: "Ligue 1", home: "PSG", away: "Marseille", homeScore: 2, awayScore: 2, minute: "72'", homeLogo: "🇫🇷", awayLogo: "🇫🇷", status: "LIVE" },
+];
+
+const upcomingMatches = [
+  { id: 7, league: "Premier League", home: "Arsenal", away: "Chelsea", time: "19:30", date: "Today", homeLogo: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", awayLogo: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+  { id: 8, league: "Champions League", home: "Manchester City", away: "Inter Milan", time: "21:00", date: "Today", homeLogo: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", awayLogo: "🇮🇹" },
+  { id: 9, league: "La Liga", home: "Atletico Madrid", away: "Sevilla", time: "20:00", date: "Tomorrow", homeLogo: "🇪🇸", awayLogo: "🇪🇸" },
+];
+---
+
+<Layout title="Live Scores" description="Real-time football scores and match updates">
+  <Header />
+
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero -->
+    <div class="bg-gradient-to-br from-green-700 via-green-600 to-emerald-700 py-12">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="flex items-center space-x-3 mb-2">
+              <span class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+              <span class="text-red-300 font-semibold text-sm uppercase tracking-wide">Live Now</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Live Scores</h1>
+            <p class="text-green-100 mt-2">Real-time updates from matches around the world</p>
+          </div>
+          <div class="hidden md:block text-right">
+            <p class="text-4xl font-bold text-white">6</p>
+            <p class="text-green-200 text-sm">Live Matches</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <!-- Live Matches -->
+      <div class="mb-12">
+        <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+          <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
+          Matches in Progress
+        </h2>
+
+        <div class="grid gap-4">
+          {liveMatches.map((match) => (
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-green-500">
+              <div class="flex flex-col md:flex-row md:items-center justify-between">
+                <!-- League & Time -->
+                <div class="flex items-center space-x-3 mb-4 md:mb-0 md:w-48">
+                  <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">{match.league}</span>
+                  <span class="text-red-500 font-bold animate-pulse">{match.minute}</span>
+                </div>
+
+                <!-- Match Teams -->
+                <div class="flex-1 flex items-center justify-center">
+                  <div class="flex items-center space-x-6">
+                    <!-- Home Team -->
+                    <div class="flex items-center space-x-3">
+                      <span class="text-3xl">{match.homeLogo}</span>
+                      <span class="font-bold text-gray-900 text-lg hidden sm:block">{match.home}</span>
+                    </div>
+
+                    <!-- Score -->
+                    <div class="bg-green-700 text-white px-6 py-3 rounded-xl font-bold text-2xl min-w-[100px] text-center shadow-lg">
+                      {match.homeScore} - {match.awayScore}
+                    </div>
+
+                    <!-- Away Team -->
+                    <div class="flex items-center space-x-3">
+                      <span class="font-bold text-gray-900 text-lg hidden sm:block">{match.away}</span>
+                      <span class="text-3xl">{match.awayLogo}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="md:w-48 flex justify-end mt-4 md:mt-0">
+                  <button class="text-green-600 hover:text-green-700 font-medium text-sm flex items-center group">
+                    Match Stats
+                    <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Upcoming Matches -->
+      <div>
+        <h2 class="text-xl font-bold text-gray-900 mb-6">Upcoming Matches</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {upcomingMatches.map((match) => (
+            <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded">{match.league}</span>
+                <span class="text-sm text-gray-600">{match.time} • {match.date}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <span class="text-2xl">{match.homeLogo}</span>
+                  <span class="font-medium text-gray-900 text-sm">{match.home}</span>
+                </div>
+                <span class="text-gray-400 font-bold">VS</span>
+                <div class="flex items-center space-x-2">
+                  <span class="font-medium text-gray-900 text-sm">{match.away}</span>
+                  <span class="text-2xl">{match.awayLogo}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>

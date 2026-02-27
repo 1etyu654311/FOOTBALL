@@ -1,0 +1,77 @@
+---
+import NewsCard from './NewsCard.astro';
+
+const news = [
+  {
+    title: "Manchester City Signs Record-Breaking Deal with New Striker",
+    excerpt: "Pep Guardiola's side continues their dominance in the transfer market with a blockbuster signing that breaks all records.",
+    image: "https://images.unsplash.com/photo-1522778119026-d647f0565c6a?w=800",
+    category: "Transfer News",
+    date: "Feb 27, 2026",
+    slug: "man-city-record-signing"
+  },
+  {
+    title: "Champions League Quarter-Finals Draw Revealed",
+    excerpt: "The road to Munich 2026 is set with mouth-watering clashes between Europe's elite clubs.",
+    image: "https://images.unsplash.com/photo-1489944440615-453fc2b6c88a?w=800",
+    category: "Champions League",
+    date: "Feb 27, 2026",
+    slug: "ucl-quarter-finals-draw"
+  },
+  {
+    title: "Lionel Messi Announces Retirement Plans",
+    excerpt: "The football legend reveals his final season plans and what's next after an illustrious career.",
+    image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800",
+    category: "Breaking News",
+    date: "Feb 26, 2026",
+    slug: "messi-retirement-plans"
+  },
+  {
+    title: "Premier League Title Race Heats Up",
+    excerpt: "With just 10 games remaining, Arsenal and Liverpool are separated by just two points in the race for glory.",
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800",
+    category: "Premier League",
+    date: "Feb 26, 2026",
+    slug: "premier-league-title-race"
+  },
+  {
+    title: "Real Madrid's New Generation Shines",
+    excerpt: "Young talents are taking over at the Bernabéu as Los Blancos prepare for the future.",
+    image: "https://images.unsplash.com/photo-1580237678790-3e9d2db16499?w=800",
+    category: "La Liga",
+    date: "Feb 25, 2026",
+    slug: "real-madrid-new-generation"
+  },
+  {
+    title: "Women's World Cup 2027: Host Nations Announced",
+    excerpt: "FIFA reveals the joint-hosts for the biggest tournament in women's football history.",
+    image: "https://images.unsplash.com/photo-1560272564-c386b59963f2?w=800",
+    category: "International",
+    date: "Feb 25, 2026",
+    slug: "wwc-2027-hosts"
+  }
+];
+---
+
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-10">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-900">Latest News</h2>
+        <p class="text-gray-600 mt-2">All the latest football stories from around the world</p>
+      </div>
+      <a href="/news" class="text-green-600 font-semibold hover:text-green-700 flex items-center">
+        View All News
+        <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {news.map((item) => (
+        <NewsCard {...item} />
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'man-city-record-signing' } },
+    { params: { slug: 'ucl-quarter-finals-draw' } },
+    { params: { slug: 'messi-retirement-plans' } },
+    { params: { slug: 'premier-league-title-race' } },
+    { params: { slug: 'real-madrid-new-generation' } },
+    { params: { slug: 'wwc-2027-hosts' } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+const article = {
+  title: "Manchester City Signs Record-Breaking Deal with New Striker",
+  excerpt: "Pep Guardiola's side continues their dominance in the transfer market with a blockbuster signing that breaks all records.",
+  image: "https://images.unsplash.com/photo-1522778119026-d647f0565c6a?w=1200",
+  category: "Transfer News",
+  date: "Feb 27, 2026",
+  author: "James Stone",
+  readTime: "5 min read",
+  content: `
+    Manchester City has once again made headlines in the transfer market, securing a record-breaking deal for a world-class striker. The move further solidifies their position as one of the most ambitious clubs in world football.
+
+    The transfer, worth a reported €150 million, breaks the previous record and demonstrates City's commitment to maintaining their dominance in both domestic and European competitions.
+
+    "This is an exciting day for the club," said Pep Guardiola during the unveiling press conference. "We've been tracking this player for months, and we're thrilled to finally welcome him to Manchester."
+
+    The striker, who has been in phenomenal form this season with 28 goals in 32 appearances, is expected to make his debut in the upcoming Champions League quarter-final. His arrival could prove crucial as City looks to secure an unprecedented fifth consecutive Premier League title.
+
+    The deal includes significant performance bonuses and a contract that runs until 2030. The player's previous club expressed their disappointment at losing their star asset but acknowledged the irresistible nature of City's offer.
+
+    Fans have already begun gathering outside the Etihad Stadium to welcome the new signing, with replica shirts selling out within hours of the announcement. The commercial impact of this transfer is expected to be significant, with sponsorship deals already being discussed.
+
+    As the transfer window nears its close, all eyes will be on how this blockbuster move affects the balance of power in English football. Liverpool and Arsenal, City's main rivals, will need to respond if they hope to keep pace with the reigning champions.
+  `
+};
+---
+
+<Layout title={article.title} description={article.excerpt}>
+  <Header />
+  
+  <article class="min-h-screen bg-white">
+    <!-- Hero Image -->
+    <div class="relative h-96 md:h-[500px] overflow-hidden">
+      <img 
+        src={article.image} 
+        alt={article.title}
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-8 max-w-4xl mx-auto">
+        <span class="inline-block px-4 py-1 bg-green-600 text-white text-sm font-bold rounded-full mb-4">
+          {article.category}
+        </span>
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+          {article.title}
+        </h1>
+        <div class="flex items-center text-white/90 space-x-6 text-sm">
+          <span>By {article.author}</span>
+          <span>•</span>
+          <span>{article.date}</span>
+          <span>•</span>
+          <span>{article.readTime}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <div class="prose prose-lg prose-green mx-auto">
+        {article.content.split('\n\n').map((paragraph) => (
+          <p class="text-gray-700 leading-relaxed mb-6">{paragraph.trim()}</p>
+        ))}
+      </div>
+
+      <!-- Share Buttons -->
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <h3 class="text-lg font-bold mb-4">Share this article</h3>
+        <div class="flex space-x-3">
+          <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            Twitter
+          </button>
+          <button class="px-6 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition-colors">
+            Facebook
+          </button>
+          <button class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+            WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <Footer />
+</Layout>

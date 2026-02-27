@@ -1,0 +1,93 @@
+---
+const liveMatches = [
+  { id: 1, home: "Man City", away: "Liverpool", homeScore: 2, awayScore: 1, time: "78'", status: "LIVE", league: "Premier League" },
+  { id: 2, home: "Real Madrid", away: "Barcelona", homeScore: 1, awayScore: 1, time: "65'", status: "LIVE", league: "La Liga" },
+  { id: 3, home: "Bayern Munich", away: "Dortmund", homeScore: 3, awayScore: 2, time: "89'", status: "LIVE", league: "Bundesliga" },
+  { id: 4, home: "Juventus", away: "AC Milan", homeScore: 0, awayScore: 0, time: "45'", status: "HT", league: "Serie A" },
+];
+
+const upcomingMatches = [
+  { id: 5, home: "PSG", away: "Man City", time: "20:45", date: "Today", league: "Champions League" },
+  { id: 6, home: "Arsenal", away: "Chelsea", time: "16:00", date: "Tomorrow", league: "Premier League" },
+];
+---
+
+<section class="py-16 bg-gradient-to-br from-gray-900 to-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse mr-3"></div>
+        <h2 class="text-2xl md:text-3xl font-bold text-white">Live Matches</h2>
+      </div>
+      <a href="/live" class="text-green-400 hover:text-green-300 font-medium flex items-center">
+        View All
+        <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Live Matches Grid -->
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+      {liveMatches.map((match) => (
+        <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-green-500/50 transition-all group cursor-pointer">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-medium text-gray-400">{match.league}</span>
+            <span class={`flex items-center text-xs font-bold ${
+              match.status === 'LIVE' ? 'text-red-400' : match.status === 'HT' ? 'text-yellow-400' : 'text-gray-400'
+            }`}>
+              {match.status === 'LIVE' && <span class="w-2 h-2 bg-red-500 rounded-full mr-1 animate-pulse"></span>}
+              {match.status} • {match.time}
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center flex-1">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-sm">
+                {match.home.substring(0, 2).toUpperCase()}
+              </div>
+              <span class="ml-3 text-white font-medium">{match.home}</span>
+            </div>
+            <div class="text-center px-6">
+              <div class="text-2xl font-bold text-white bg-gradient-to-r from-green-500 to-green-600 bg-clip-text">
+                {match.homeScore} - {match.awayScore}
+              </div>
+            </div>
+            <div class="flex items-center flex-1 justify-end">
+              <span class="mr-3 text-white font-medium text-right">{match.away}</span>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                {match.away.substring(0, 2).toUpperCase()}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Upcoming Matches -->
+    <div class="border-t border-white/10 pt-8">
+      <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
+        <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Upcoming
+      </h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        {upcomingMatches.map((match) => (
+          <div class="bg-white/5 rounded-lg p-4 border border-white/10 flex items-center justify-between">
+            <div class="flex items-center">
+              <span class="text-xs text-gray-400 mr-2">{match.date}</span>
+              <span class="text-green-400 font-bold">{match.time}</span>
+            </div>
+            <div class="flex items-center flex-1 justify-center space-x-4">
+              <span class="text-white font-medium">{match.home}</span>
+              <span class="text-gray-500">vs</span>
+              <span class="text-white font-medium">{match.away}</span>
+            </div>
+            <span class="text-xs text-gray-400">{match.league}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

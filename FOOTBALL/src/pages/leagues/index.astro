@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const leagues = [
+  { 
+    name: "Premier League", 
+    country: "England", 
+    teams: 20,
+    founded: 1992,
+    currentChampion: "Manchester City",
+    color: "from-purple-600 to-purple-700",
+    logo: "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+  },
+  { 
+    name: "La Liga", 
+    country: "Spain", 
+    teams: 20,
+    founded: 1929,
+    currentChampion: "Real Madrid",
+    color: "from-orange-500 to-red-500",
+    logo: "🇪🇸"
+  },
+  { 
+    name: "Serie A", 
+    country: "Italy", 
+    teams: 20,
+    founded: 1898,
+    currentChampion: "Inter Milan",
+    color: "from-blue-600 to-cyan-500",
+    logo: "🇮🇹"
+  },
+  { 
+    name: "Bundesliga", 
+    country: "Germany", 
+    teams: 18,
+    founded: 1963,
+    currentChampion: "Bayern Munich",
+    color: "from-red-600 to-red-700",
+    logo: "🇩🇪"
+  },
+  { 
+    name: "Ligue 1", 
+    country: "France", 
+    teams: 18,
+    founded: 1932,
+    currentChampion: "Paris Saint-Germain",
+    color: "from-blue-700 to-blue-800",
+    logo: "🇫🇷"
+  },
+  { 
+    name: "Champions League", 
+    country: "Europe", 
+    teams: 32,
+    founded: 1955,
+    currentChampion: "Real Madrid",
+    color: "from-yellow-400 to-yellow-500",
+    logo: "🇪🇺"
+  },
+];
+---
+
+<Layout title="Leagues" description="Explore top football leagues from around the world">
+  <Header />
+
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero -->
+    <div class="bg-gradient-to-r from-green-700 via-green-600 to-emerald-700 py-16">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">World Football Leagues</h1>
+        <p class="text-green-100 text-lg max-w-2xl mx-auto">
+          Follow your favorite leagues and competitions from around the globe
+        </p>
+      </div>
+    </div>
+
+    <!-- Leagues Grid -->
+    <div class="max-w-7xl mx-auto px-4 py-16">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {leagues.map((league) => (
+          <div class={`group bg-gradient-to-br ${league.color} rounded-2xl p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden relative`}>
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+              <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -mr-20 -mt-20"></div>
+              <div class="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full -ml-16 -mb-16"></div>
+            </div>
+            
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-5xl">{league.logo}</span>
+                <span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                  {league.teams} Teams
+                </span>
+              </div>
+              
+              <h3 class="text-2xl font-bold mb-2">{league.name}</h3>
+              <p class="text-white/80 mb-4">{league.country}</p>
+              
+              <div class="border-t border-white/20 pt-4 mt-4">
+                <p class="text-sm text-white/70 mb-1">Current Champion</p>
+                <p class="font-semibold text-lg">{league.currentChampion}</p>
+              </div>
+              
+              <a 
+                href={`/leagues/${league.name.toLowerCase().replace(/\s+/g, '-')}`}
+                class="mt-6 inline-flex items-center text-sm font-semibold hover:text-yellow-300 transition-colors"
+              >
+                View Standings
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
