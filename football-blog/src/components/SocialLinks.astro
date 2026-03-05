@@ -1,0 +1,80 @@
+---
+// Social Links Component
+// Displays social media links in the footer
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const socialLinks = {
+  twitter: { href: 'https://twitter.com/footballblog', label: 'Follow us on Twitter' },
+  instagram: { href: 'https://instagram.com/footballblog', label: 'Follow us on Instagram' },
+  youtube: { href: 'https://youtube.com/footballblog', label: 'Subscribe on YouTube' },
+  facebook: { href: 'https://facebook.com/footballblog', label: 'Like us on Facebook' },
+  email: { href: 'mailto:contact@footballblog.com', label: 'Contact us' },
+};
+---
+
+<div class="social-links">
+  <h3>Follow Us</h3>
+  <div class="links-grid">
+    {Object.entries(socialLinks).map(([platform, link]) => (
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+        aria-label={link.label}
+      >
+        <span>{platform.charAt(0).toUpperCase() + platform.slice(1)}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .social-links h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: rgb(var(--text-main));
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background: rgb(var(--card-bg));
+    color: rgb(var(--text-main));
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .social-link:hover {
+    background: rgb(var(--accent));
+    color: rgb(var(--white));
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: 640px) {
+    .links-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

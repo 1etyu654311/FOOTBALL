@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, author, category, slug, language } = Astro.props;
+---
+
+<html lang={language}>
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.meta {
+				margin-bottom: 1em;
+				padding: 1em;
+				background: rgb(var(--gray));
+				color: rgb(var(--white));
+				border-radius: 8px;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1rem;
+				justify-content: center;
+			}
+			.meta-item {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			.meta-item span {
+				font-weight: 600;
+			}
+			.category-badge {
+				background: rgb(var(--accent));
+				padding: 0.25rem 0.75rem;
+				border-radius: 9999px;
+				font-size: 0.875rem;
+				font-weight: 600;
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header lang={language || 'en'} />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="title">
+						<div class="meta">
+							<div class="meta-item">
+								<span>Category:</span>
+								<span class="category-badge">{category}</span>
+							</div>
+							<div class="meta-item">
+								<span>Author:</span>
+								<span>{author}</span>
+							</div>
+							<div class="meta-item">
+								<span>Published:</span>
+								<span>
+									<FormattedDate date={pubDate} />
+								</span>
+							</div>
+							{
+								updatedDate && (
+									<div class="meta-item last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						<h1>{title}</h1>
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer lang={language || 'en'} />
+	</body>
+</html>

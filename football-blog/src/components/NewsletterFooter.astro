@@ -1,0 +1,91 @@
+---
+// Newsletter Footer Component
+// Displays newsletter subscription in the footer section
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+---
+
+<div class="newsletter-footer">
+  <h3>Subscribe to Our Newsletter</h3>
+  <p>Get the latest football news, analysis, and insights delivered straight to your inbox.</p>
+  <form class="newsletter-form" action="/subscribe" method="POST">
+    <div class="form-row">
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter your email address"
+        required
+        aria-label="Email address"
+      />
+      <button type="submit">Subscribe</button>
+    </div>
+  </form>
+  <p class="disclaimer">We respect your privacy. Unsubscribe at any time.</p>
+</div>
+
+<style>
+  .newsletter-footer {
+    background: rgb(var(--card-bg));
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .newsletter-footer h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--text-main));
+  }
+
+  .newsletter-footer p {
+    color: rgb(var(--text-secondary));
+    margin-bottom: 1.5rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgb(var(--border));
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  .newsletter-form button {
+    padding: 0.75rem 1.5rem;
+    background: rgb(var(--accent));
+    color: rgb(var(--white));
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .newsletter-form button:hover {
+    background: rgb(var(--accent-dark));
+  }
+
+  .disclaimer {
+    font-size: 0.875rem;
+    color: rgb(var(--text-secondary));
+    margin-top: 1rem;
+  }
+</style>

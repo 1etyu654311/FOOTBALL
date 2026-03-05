@@ -1,0 +1,85 @@
+---
+// Newsletter Sidebar Component
+// Displays newsletter signup in the sidebar of blog posts
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+---
+
+<div class="newsletter-sidebar">
+  <h3>Subscribe to the Newsletter</h3>
+  <p>Get weekly football insights delivered to your inbox.</p>
+  <form class="newsletter-form" action="/subscribe" method="POST">
+    <input
+      type="email"
+      name="email"
+      placeholder="your@email.com"
+      required
+      aria-label="Email address"
+    />
+    <button type="submit">Subscribe</button>
+  </form>
+  <p class="privacy">No spam. Unsubscribe anytime.</p>
+</div>
+
+<style>
+  .newsletter-sidebar {
+    background: rgb(var(--card-bg));
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .newsletter-sidebar h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--text-main));
+  }
+
+  .newsletter-sidebar p {
+    font-size: 0.9rem;
+    color: rgb(var(--text-secondary));
+    margin-bottom: 1rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .newsletter-form input {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    border: 1px solid rgb(var(--border));
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    background: rgb(var(--accent));
+    color: rgb(var(--white));
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .newsletter-form button:hover {
+    background: rgb(var(--accent-dark));
+  }
+
+  .privacy {
+    font-size: 0.8rem;
+    color: rgb(var(--text-secondary));
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+</style>

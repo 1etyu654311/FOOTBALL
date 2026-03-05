@@ -1,0 +1,158 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+const featuredPosts = (await getCollection('blog'))
+  .filter(post => post.data.category === 'Premier League')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2rem;
+			}
+			.hero {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+			.hero h1 {
+				font-size: 3rem;
+				margin-bottom: 1rem;
+				color: rgb(var(--gray-dark));
+			}
+			.hero p {
+				font-size: 1.25rem;
+				color: rgb(var(--gray));
+				max-width: 600px;
+				margin: 0 auto;
+			}
+			.section-title {
+				font-size: 2rem;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.5rem;
+				border-bottom: 2px solid rgb(var(--accent));
+			}
+			.posts-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+				gap: 2rem;
+				margin-bottom: 3rem;
+			}
+			.post-card {
+				background: rgb(var(--card-bg));
+				border-radius: 12px;
+				overflow: hidden;
+				box-shadow: var(--box-shadow);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			.post-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+			}
+			.post-image {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+			}
+			.post-content {
+				padding: 1.5rem;
+			}
+			.post-category {
+				display: inline-block;
+				background: rgb(var(--accent));
+				color: rgb(var(--white));
+				padding: 0.25rem 0.75rem;
+				border-radius: 9999px;
+				font-size: 0.875rem;
+				font-weight: 600;
+				margin-bottom: 0.5rem;
+			}
+			.post-title {
+				font-size: 1.25rem;
+				margin-bottom: 0.5rem;
+				line-height: 1.4;
+			}
+			.post-date {
+				color: rgb(var(--gray));
+				font-size: 0.875rem;
+			}
+			.categories-nav {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin-bottom: 2rem;
+			}
+			.category-tag {
+				padding: 0.5rem 1rem;
+				background: rgb(var(--gray));
+				color: rgb(var(--white));
+				border-radius: 9999px;
+				text-decoration: none;
+				font-size: 0.875rem;
+				transition: background 0.2s ease;
+			}
+			.category-tag:hover {
+				background: rgb(var(--accent));
+			}
+		</style>
+	</head>
+	<body>
+		<Header lang="en" />
+		<main>
+			<div class="hero">
+				<h1>⚽ Football Blog</h1>
+				<p>Your daily source for football news, analysis, and insights from around the world</p>
+			</div>
+
+			<h2 class="section-title">Featured Posts</h2>
+			<div class="posts-grid">
+				{
+					featuredPosts.map((post) => (
+						<a href={`/blog/${post.id}/`} class="post-card">
+							{post.data.heroImage && (
+								<img src={post.data.heroImage} alt={post.data.title} class="post-image" loading="lazy" />
+							)}
+							<div class="post-content">
+								<span class="post-category">{post.data.category}</span>
+								<h3 class="post-title">{post.data.title}</h3>
+								<p class="post-date">
+									{new Date(post.data.pubDate).toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric'
+									})}
+								</p>
+							</div>
+						</a>
+					))
+				}
+			</div>
+
+			<h2 class="section-title">All Posts</h2>
+			<div class="categories-nav">
+				<a href="/blog/" class="category-tag">All Posts</a>
+				<a href="/blog/category/premier-league/" class="category-tag">Premier League</a>
+				<a href="/blog/category/bundesliga/" class="category-tag">Bundesliga</a>
+				<a href="/blog/category/la-liga/" class="category-tag">La Liga</a>
+				<a href="/blog/category/serie-a/" class="category-tag">Serie A</a>
+				<a href="/blog/category/ligue-1/" class="category-tag">Ligue 1</a>
+				<a href="/blog/category/champions-league/" class="category-tag">Champions League</a>
+				<a href="/blog/category/womens-football/" class="category-tag">Women's Football</a>
+				<a href="/blog/category/transfer-market/" class="category-tag">Transfer Market</a>
+				<a href="/blog/category/analysis/" class="category-tag">Analysis</a>
+				<a href="/blog/category/travel/" class="category-tag">Travel</a>
+			</div>
+		</main>
+		<Footer lang="en" />
+	</body>
+</html>

@@ -1,0 +1,79 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={'About - ' + SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 2rem;
+				line-height: 1.8;
+			}
+			.hero {
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+			.hero h1 {
+				font-size: 2.5rem;
+				margin-bottom: 1rem;
+			}
+			.hero p {
+				color: rgb(var(--gray));
+				font-size: 1.1rem;
+			}
+			section {
+				margin-bottom: 2rem;
+			}
+			h2 {
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+				padding-bottom: 0.5rem;
+				border-bottom: 2px solid rgb(var(--accent));
+			}
+			p {
+				margin-bottom: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<Header lang="en" />
+		<main>
+			<div class="hero">
+				<h1>About Football Blog</h1>
+				<p>Your trusted source for football news, analysis, and insights</p>
+			</div>
+
+			<section>
+				<h2>Our Mission</h2>
+				<p>Football Blog is dedicated to providing comprehensive coverage of football from around the world. We bring you the latest news, in-depth analysis, and expert insights from the beautiful game.</p>
+			</section>
+
+			<section>
+				<h2>What We Cover</h2>
+				<p>We cover all major football leagues and competitions:</p>
+				<ul>
+					<li>Premier League (England)</li>
+					<li>Bundesliga (Germany)</li>
+					<li>La Liga (Spain)</li>
+					<li>Serie A (Italy)</li>
+					<li>Ligue 1 (France)</li>
+					<li>Champions League</li>
+					<li>Women's Football</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Contact</h2>
+				<p>Have questions or suggestions? Feel free to reach out to us through our social media channels.</p>
+			</section>
+		</main>
+		<Footer lang="en" />
+	</body>
+</html>

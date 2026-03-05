@@ -1,0 +1,63 @@
+---
+import { languages, defaultLang } from '../i18n/ui';
+
+interface Props {
+  lang: 'en' | 'es' | 'fr' | 'ar';
+}
+
+const { lang } = Astro.props;
+const otherLangs = Object.keys(languages).filter((l) => l !== lang) as (keyof typeof languages)[];
+---
+
+<div class="relative" id="lang-switcher">
+  <button
+    id="lang-button"
+    class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors text-sm font-medium"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <span class="text-lg">{lang === 'en' ? '🇬🇧' : lang === 'es' ? '🇪🇸' : lang === 'fr' ? '🇫🇷' : '🇸🇦'}</span>
+    <span class="hidden sm:inline">{languages[lang]}</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  
+  <div
+    id="lang-menu"
+    class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-200 py-1 hidden"
+    role="menu"
+  >
+    {otherLangs.map((l) => {
+      const href = l === defaultLang ? '/' : `/${l}/`;
+      return (
+        <a
+          href={href}
+          class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+          role="menuitem"
+        >
+          <span class="text-lg">{l === 'en' ? '🇬🇧' : l === 'es' ? '🇪🇸' : l === 'fr' ? '🇫🇷' : '🇸🇦'}</span>
+          <span>{languages[l]}</span>
+        </a>
+      );
+    })}
+  </div>
+</div>
+
+<script>
+  const button = document.getElementById('lang-button');
+  const menu = document.getElementById('lang-menu');
+  
+  button?.addEventListener('click', () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+  
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element).closest('#lang-switcher')) {
+      button?.setAttribute('aria-expanded', 'false');
+      menu?.classList.add('hidden');
+    }
+  });
+</script>

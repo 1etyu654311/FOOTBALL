@@ -1,0 +1,52 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: 'en' | 'es' | 'fr' | 'ar';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-slate-900 text-slate-300 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <a href={`/${lang}`} class="flex items-center gap-2 mb-4">
+          <span class="text-2xl">⚽</span>
+          <span class="font-bold text-xl text-white">FootballHub</span>
+        </a>
+        <p class="text-slate-400 max-w-md">
+          Your trusted source for football news, transfers, and match coverage from around the world.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-semibold text-white mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href={`/${lang}`} class="hover:text-white transition-colors">{t('nav.home')}</a></li>
+          <li><a href={`/${lang}#latest`} class="hover:text-white transition-colors">{t('nav.latest')}</a></li>
+          <li><a href={`/${lang}#trending`} class="hover:text-white transition-colors">{t('nav.trending')}</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="font-semibold text-white mb-4">Leagues</h3>
+        <ul class="space-y-2">
+          <li><a href={`/${lang}?category=premier-league`} class="hover:text-white transition-colors">{t('categories.premier-league')}</a></li>
+          <li><a href={`/${lang}?category=la-liga`} class="hover:text-white transition-colors">{t('categories.la-liga')}</a></li>
+          <li><a href={`/${lang}?category=champions-league`} class="hover:text-white transition-colors">{t('categories.champions-league')}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800 mt-8 pt-8 text-center text-slate-500">
+      <p>© {currentYear} FootballHub. {t('footer.rights')}.</p>
+    </div>
+  </div>
+</footer>
