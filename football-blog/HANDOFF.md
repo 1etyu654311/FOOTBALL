@@ -54,6 +54,12 @@ A modern, multilingual football blog built with Astro, TypeScript, and Tailwind 
    - Clean code structure
    - Comprehensive documentation
 
+6. **Related Articles**
+   - Keep Reading component now fetches and displays related posts from the same category
+   - Shows up to 3 related articles with images, titles, and dates
+   - Excludes current post from recommendations
+   - Fully responsive grid layout
+
 ## Project Structure
 
 ```
