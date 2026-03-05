@@ -13,8 +13,14 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
+
+// Fetch related posts from the same category (excluding current post)
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+	.filter((p) => p.data.category === post.data.category && p.id !== post.id)
+	.slice(0, 3); // Get top 3 related posts
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} relatedPosts={relatedPosts}>
 	<Content />
 </BlogPost>
