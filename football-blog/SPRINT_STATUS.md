@@ -13,6 +13,7 @@
 - [x] Add multilingual routing/navigation (EN + ES)
 - [x] Add retention components (Keep Reading, Newsletter, Share)
 - [x] Implement real related articles logic (Keep Reading now fetches posts from same category)
+- [x] Add explicit language routing with [lang] directory
 - [x] Commit and push to GitHub
 - [x] Write final handoff file
 
@@ -28,4 +29,4 @@
 - None currently
 
 ## LAST_UPDATE
-- 2026-03-05 07:07 GMT+1 - ✅ Related articles logic implemented and deployed
+- 2026-03-05 07:47 GMT+1 - ✅ Explicit language routing implemented and deployed
