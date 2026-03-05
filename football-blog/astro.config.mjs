@@ -10,6 +10,13 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap()],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es'],
+    routing: {
+      prerender: true,
+    },
+  },
 
   vite: {
     plugins: [tailwindcss()],

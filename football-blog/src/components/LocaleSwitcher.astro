@@ -1,0 +1,32 @@
+---
+interface Props {
+  currentLocale: 'en' | 'es';
+}
+
+const { currentLocale } = Astro.props;
+---
+
+<div class="flex items-center gap-2">
+  <a
+    href="/"
+    aria-label="Switch to English"
+    class={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+      currentLocale === 'en'
+        ? 'bg-blue-600 text-white'
+        : 'text-slate-600 hover:bg-slate-100'
+    }`}
+  >
+    EN
+  </a>
+  <a
+    href="/es/"
+    aria-label="Cambiar a español"
+    class={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+      currentLocale === 'es'
+        ? 'bg-blue-600 text-white'
+        : 'text-slate-600 hover:bg-slate-100'
+    }`}
+  >
+    ES
+  </a>
+</div>

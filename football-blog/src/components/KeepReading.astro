@@ -1,0 +1,67 @@
+---
+interface Props {
+  currentPostId: string;
+  category: string;
+  lang?: 'en' | 'es';
+}
+
+const { currentPostId, category, lang = 'en' } = Astro.props;
+const isRTL = lang === 'ar';
+---
+
+<section class="keep-reading">
+  <h2 class="section-title">{lang === 'es' ? 'Leer también' : 'Keep Reading'}</h2>
+  <div class="posts-grid">
+    <!-- Placeholder: In production, fetch related posts from the blog collection -->
+    <div class="post-card">
+      <div class="post-content">
+        <p class="post-date">
+          {lang === 'es' ? 'Próximamente' : 'Coming soon'}
+        </p>
+        <p class="post-title">
+          {lang === 'es' ? 'Más artículos de esta categoría' : 'More articles in this category'}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .keep-reading {
+    margin: 4rem 0;
+  }
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgb(var(--accent));
+  }
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+  .post-card {
+    background: rgb(var(--card-bg));
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  .post-content {
+    padding: 1.5rem;
+  }
+  .post-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+  .post-date {
+    color: rgb(var(--gray));
+    font-size: 0.875rem;
+  }
+</style>

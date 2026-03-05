@@ -2,8 +2,18 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import LocaleSwitcher from '../components/LocaleSwitcher.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
+
+const locale = Astro.currentLocale || 'en';
+const isRTL = locale === 'ar';
+
+const featuredPosts = (await getCollection('blog'))
+  .filter(post => post.data.category === 'Premier League')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
 
 const featuredPosts = (await getCollection('blog'))
   .filter(post => post.data.category === 'Premier League')
@@ -12,7 +22,7 @@ const featuredPosts = (await getCollection('blog'))
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'}>
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
@@ -107,11 +117,13 @@ const featuredPosts = (await getCollection('blog'))
 		</style>
 	</head>
 	<body>
-		<Header lang="en" />
+		<Header lang={locale}>
+			<LocaleSwitcher currentLocale={locale} />
+		</Header>
 		<main>
 			<div class="hero">
 				<h1>⚽ Football Blog</h1>
-				<p>Your daily source for football news, analysis, and insights from around the world</p>
+				<p>{locale === 'es' ? 'Tu fuente diaria de noticias, análisis e ideas del fútbol de todo el mundo' : 'Your daily source for football news, analysis, and insights from around the world'}</p>
 			</div>
 
 			<h2 class="section-title">Featured Posts</h2>
